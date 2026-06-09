@@ -13,13 +13,15 @@ export class CategoriasService {
   ) {}
 
   findAll() {
-    return this.categoriaRepo.find({ relations: ['productos'] });
+    return this.categoriaRepo.find({
+      relations: { productos: true },
+    });
   }
 
   async findOne(id: number) {
     const categoria = await this.categoriaRepo.findOne({
       where: { idCategoria: id },
-      relations: ['productos'],
+      relations: { productos: true },
     });
     if (!categoria) throw new NotFoundException(`Categoría #${id} no encontrada`);
     return categoria;

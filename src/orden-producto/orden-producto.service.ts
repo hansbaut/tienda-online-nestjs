@@ -13,13 +13,15 @@ export class OrdenProductoService {
   ) {}
 
   findAll() {
-    return this.ordenProductoRepo.find({ relations: ['orden', 'producto'] });
+    return this.ordenProductoRepo.find({
+      relations: { orden: true, producto: true },
+    });
   }
 
   async findOne(id: number) {
     const op = await this.ordenProductoRepo.findOne({
       where: { idOrdenProducto: id },
-      relations: ['orden', 'producto'],
+      relations: { orden: true, producto: true },
     });
     if (!op) throw new NotFoundException(`OrdenProducto #${id} no encontrada`);
     return op;

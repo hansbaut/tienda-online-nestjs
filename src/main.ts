@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ApiReference } from '@scalar/nestjs-api-reference';
+import { apiReference } from '@scalar/nestjs-api-reference';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +17,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  app.use('/docs', ApiReference({ spec: { content: document } }));
+  app.use('/docs', apiReference({ spec: { content: document } }));
 
   await app.listen(3000);
   console.log('🚀 Servidor corriendo en http://localhost:3000');
